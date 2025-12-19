@@ -1,6 +1,6 @@
 pub global MAX_DEPTH : u32 = 32;
 
-fn verifyProof(
+pub fn verifyProof(
     leafIdx: u32,
     leafKey: u64,
     leafNextIdx: u32,
@@ -28,7 +28,7 @@ fn verifyProof(
     assert(hash == root);
 }
 
-fn verifyExclusionProof(
+pub fn verifyExclusionProof(
     leafIdx: u32,
     leafKey: u64,
     leafNextIdx: u32,
