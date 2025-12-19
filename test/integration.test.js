@@ -29,9 +29,9 @@ describe('Integration Tests', () => {
     const merkleProof = tree.generateProof(16n);
 
     const inputs = {
-      leafIdx: merkleProof.leafIdx,
+      leafIdx: merkleProof.leafIdx.toString(10),
       leafKey: merkleProof.leaf.key.toString(10),
-      leafNextIdx: merkleProof.leaf.nextIdx,
+      leafNextIdx: merkleProof.leaf.nextIdx.toString(10),
       leafNextKey: merkleProof.leaf.nextKey.toString(10),
       leafValue: merkleProof.leaf.value.toString(10),
       root: merkleProof.root.toString(10),
@@ -59,9 +59,9 @@ describe('Integration Tests', () => {
     const merkleProof = tree.generateExclusionProof(excludedKey);
 
     const inputs = {
-      leafIdx: merkleProof.leafIdx,
+      leafIdx: merkleProof.leafIdx.toString(10),
       leafKey: merkleProof.leaf.key.toString(10),
-      leafNextIdx: merkleProof.leaf.nextIdx,
+      leafNextIdx: merkleProof.leaf.nextIdx.toString(10),
       leafNextKey: merkleProof.leaf.nextKey.toString(10),
       leafValue: merkleProof.leaf.value.toString(10),
       root: merkleProof.root.toString(10),

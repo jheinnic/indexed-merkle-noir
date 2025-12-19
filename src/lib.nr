@@ -9,9 +9,9 @@ fn verifyProof(
     root: Field,
     siblings: [Field; MAX_DEPTH]
 ) {
-    let mut hash = poseidon::poseidon::bn254::hash_4([
+    let mut hash = poseidon::poseidon2::Poseidon2::hash([
         leafKey as Field, leafNextIdx as Field, leafNextKey as Field, leafValue
-    ]);
+    ], 4);
     let mut idx = leafIdx;
     for i in 0..MAX_DEPTH {
         if siblings[i] != 0 {
@@ -21,7 +21,7 @@ fn verifyProof(
             } else {
                 (siblings[i], hash)
             };
-            hash = poseidon::poseidon::bn254::hash_2([hash_left, hash_right]);
+            hash = poseidon::poseidon2::Poseidon2::hash([hash_left, hash_right], 2);
             idx >>= 1;
         }
     };
@@ -105,9 +105,9 @@ pub fn verifyInsertionProof(
     }
     // 4) Now recompute the "sub-root" of the new leaf up to diffIdx, and
     //    check it matches the sibling that was injected into the prev-proof.
-    let mut hash = poseidon::poseidon::bn254::hash_4([
+    let mut hash = poseidon::poseidon2::Poseidon2::hash([
         newLeafKey as Field, ogLeafNextIdx as Field, ogLeafNextKey as Field, newLeafValue
-    ]);
+    ], 4);
     let mut idx = newLeafIdx;
     for i in 0..MAX_DEPTH {
         if i < diffIdx {
@@ -117,7 +117,7 @@ pub fn verifyInsertionProof(
             } else {
                 (siblingsAfterNew[i], hash)
             };
-            hash = poseidon::poseidon::bn254::hash_2([hash_left, hash_right]);
+            hash = poseidon::poseidon2::Poseidon2::hash([hash_left, hash_right], 2);
             idx >>= 1;
         }
     };
