@@ -106,6 +106,7 @@ export class IndexedMerkleTree {
   }
 
   verifyProof(proof) {
+    // console.error("!!", proof.leaf)
     let hash = poseidon2Hash([
       proof.leaf.key,
       proof.leaf.nextIdx,
@@ -119,6 +120,7 @@ export class IndexedMerkleTree {
       idx >>= 1n;
     }
 
+    // console.log("##", hash, " <=?=> ", proof.root)
     return hash === proof.root;
   }
 
